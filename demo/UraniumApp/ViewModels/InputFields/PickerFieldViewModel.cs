@@ -13,22 +13,26 @@ public class PickerFieldViewModel : SingleControlEditingViewModel<PickerField>
 {
 
     //Test props
-    private ObservableCollection<TestModel> testModels;
-    public ObservableCollection<TestModel> TestModels { get { return testModels; } }
+    private ObservableCollection<string> testModels;
+    public ObservableCollection<string> TestModels { get { return testModels; } }
+
+    public string SelectedItem { get; set; }
 
     public PickerFieldViewModel()
     {
-        testModels = new ObservableCollection<TestModel>()
+        testModels = new ObservableCollection<string>()
         {
-            new TestModel() {Value = "option1"},
-            new TestModel() {Value = "option2"}
+            "option1",
+            "option2",
         };
-    }
+		SelectedItem = TestModels[0];
+	}
     protected override string InitialXDocumentCode => """<ContentPage xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"><material:PickerField /></ContentPage>""";
 
     protected override PickerField InitializeControl()
     {
-        return new PickerField
+		
+		return new PickerField
         {
             Title = "Pick an option",
             ItemsSource = new[]
